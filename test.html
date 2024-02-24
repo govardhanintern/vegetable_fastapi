@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Item List</title>
+</head>
+<body>
+
+<div id="items-container">
+    <!-- Item list will be displayed here -->
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+    const itemsContainer = document.getElementById('items-container');
+    const url = "http://192.168.29.183:8001"
+    // Make an HTTP GET request to the /items/ endpoint
+    fetch(url+'/items/')
+        .then(response => response.json())
+        .then(data => {
+            // Data should contain the list of items
+            const items = data.items;
+            console.log(items);
+            // Iterate through the items and display them in the container
+            items.forEach(item => {
+                const itemElement = document.createElement('div');
+                itemElement.innerHTML = `
+                    <p>Name: ${item.name}</p>
+                    <p>Description: ${item.description}</p>
+                    <p>Quantity: ${item.quantity}</p>
+                    <p>Category: ${item.category_name}</p>
+                    <img src="${url}${item.image_path}" alt="${item.name}" style="max-width: 200px; max-height: 200px;">
+                    <p>Category: ${item.status}</p>
+                    <hr>
+                `;
+                itemsContainer.appendChild(itemElement);
+            });
+        })
+        .catch(error => console.error('Error fetching items:', error));
+});
+</script>
+
+</body>
+</html>

@@ -1,0 +1,14 @@
+CREATE DATABASE vegetable_db;
+
+USE vegetable_db;
+
+INSERT INTO admins (email, password) VALUES ('k@gmail.com', '123');
+
+select * from admins;
+select * from categories;
+select * from reviews;
+select * from users;
+select * from items;
+select * from orders;
+select * from customer_orders;
+select * from pack_sizes;
